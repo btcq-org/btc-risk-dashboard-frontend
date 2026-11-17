@@ -159,6 +159,10 @@
     "technologyStack": "Stack Tecnológico",
     "frontend": "Frontend",
     "stateManagement": "Gestión de Estado"
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "description": "La página que buscas no existe o se ha movido.",
+    "backHome": "Volver al panel"
   }
 }
-
