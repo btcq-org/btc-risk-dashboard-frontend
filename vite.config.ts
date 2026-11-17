@@ -10,7 +10,12 @@ const DEFAULT_SITE_URL = 'https://dashboard.thegreatlich.xyz'
 // so these tags have to be in the static HTML.
 const siteUrlPlugin = (siteUrl: string): Plugin => ({
   name: 'site-url',
-  transformIndexHtml: (html) => html.replaceAll('__SITE_URL__', siteUrl),
+  // 'pre' so the absolute URLs are in place before Vite rewrites relative-looking
+  // URLs in the HTML (otherwise the dev server serves "/https://..." on nested routes).
+  transformIndexHtml: {
+    order: 'pre',
+    handler: (html) => html.replaceAll('__SITE_URL__', siteUrl),
+  },
 })
 
 // Public pages listed in sitemap.xml. Keep in sync with src/router/index.tsx.
