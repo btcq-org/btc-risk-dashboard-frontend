@@ -1,12 +1,22 @@
 import { useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
+import { Outlet, useLocation, useMatches } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import type { RouteHandle } from '../../router'
 import { useDashboardStore } from '../../stores/dashboardStore'
 import { Header } from './Header'
 import Footer from './Footer'
 
+const SITE_NAME = 'QBTC Risk Dashboard'
+
 export const Layout = () => {
   const fetchBitcoinPrice = useDashboardStore((s) => s.fetchBitcoinPrice)
   const { pathname } = useLocation()
+  const matches = useMatches()
+  const { t, i18n } = useTranslation()
+  const titleKey = matches
+    .map((m) => (m.handle as RouteHandle | undefined)?.titleKey)
+    .filter(Boolean)
+    .pop()
 
   // Load BTC price on first load so Header and Metrics show it regardless of initial route
   useEffect(() => {
@@ -20,6 +30,11 @@ export const Layout = () => {
     const path = pathname === '/dashboard' ? '/' : pathname.replace(/\/+$/, '') || '/'
     document.querySelector('link[rel="canonical"]')?.setAttribute('href', import.meta.env.VITE_SITE_URL + path)
   }, [pathname])
+
+  // Per-route tab title, e.g. "Latest Blocks · QBTC Risk Dashboard". Follows the UI language.
+  useEffect(() => {
+    document.title = titleKey ? `${t(titleKey)} · ${SITE_NAME}` : SITE_NAME
+  }, [titleKey, t, i18n.language])
 
   return (
     <div className="min-h-screen">
