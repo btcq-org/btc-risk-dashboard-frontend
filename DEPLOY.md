@@ -33,6 +33,7 @@ effect until you rebuild.
 |---|---|---|
 | `VITE_API_BASE_URL` | `https://api.thegreatlich.xyz/` | Python API. **The trailing slash is required.** |
 | `VITE_APP_ENVIRONMENT` | unset | Optional environment label |
+| `VITE_SITE_URL` | `https://dashboard.thegreatlich.xyz` | Public URL of the site. Used for link-preview tags, canonical URLs, `robots.txt` and `sitemap.xml`. |
 
 Copy `.env.example` to `.env` and edit it. `.env` is gitignored.
 
