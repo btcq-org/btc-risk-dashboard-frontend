@@ -18,7 +18,10 @@
       name="description"
       content="Track how much Bitcoin is exposed to quantum attacks: addresses with revealed public keys from address reuse and high-risk script types, indexed from the chain."
     />
-    <meta name="theme-color" content="#0E1726" />
+    <!-- Mobile browser bar colour, matching the header's top strip (bg-gray-50 / dark:bg-zinc-900).
+         src/stores/themeStore.ts overrides both when the user picks a theme explicitly. -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F9FAFB" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#18181B" />
 
     <!-- Link previews (Slack, X, Telegram, WhatsApp, Discord, LinkedIn, iMessage).
          These bots don't run JavaScript, so the tags must stay static here.
