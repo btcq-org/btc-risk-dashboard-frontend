@@ -50,7 +50,7 @@ export const SearchBar = ({
             radius="lg"
             size="md"
             classNames={{
-              input: "!text-triany-400 dark:!text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-normal font-['Inter'] text-sm md:text-base",
+              input: "!text-triany-400 dark:!text-gray-100 placeholder:text-gray-400 dark:placeholder:text-gray-500 font-normal text-sm md:text-base",
               inputWrapper: "border-0 shadow-none bg-transparent h-10 min-h-10 md:h-9 min-h-9 py-0 hover:!bg-transparent dark:hover:!bg-transparent data-[hover=true]:!bg-transparent focus-within:!bg-transparent dark:focus-within:!bg-transparent",
               base: "flex-1 min-w-0 mb-0"
             }}

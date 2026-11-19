@@ -104,7 +104,7 @@ const MetricRow = ({
       <div className="flex flex-col">
         <div className="flex items-center gap-2 min-w-0">
           <Icon className="w-5 h-5 mt-0.5 shrink-0 text-gray-400 dark:text-gray-400" />
-          <p className="text-[11px] font-['Inter'] font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-300">
             {label}
           </p>
         </div>
