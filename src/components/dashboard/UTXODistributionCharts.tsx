@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Card, CardBody } from '@heroui/react'
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts'
+import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip, type PieLabelRenderProps } from 'recharts'
 import { useTranslation } from 'react-i18next'
 import { useDashboardStore } from '../../stores/dashboardStore'
 import { useThemeStore } from '../../stores/themeStore'
@@ -14,6 +14,15 @@ interface ChartData {
   exposureCategory: ExposureCategory
   exposureLabel: string
   [key: string]: string | number
+}
+
+interface ChartTooltipProps {
+  active?: boolean
+  payload?: ReadonlyArray<{ payload?: unknown }>
+}
+
+interface ChartLegendProps {
+  payload?: ReadonlyArray<{ payload?: unknown }>
 }
 
 // EXPOSURE_LABELS will be translated in the component using useTranslation
@@ -107,7 +116,7 @@ export const UTXODistributionCharts = () => {
     }
   }
 
-  const CustomTooltip = ({ active, payload }: any) => {
+  const CustomTooltip = ({ active, payload }: ChartTooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload as ChartData
       return (
@@ -127,7 +136,7 @@ export const UTXODistributionCharts = () => {
     return null
   }
 
-  const CustomTooltipBalance = ({ active, payload }: any) => {
+  const CustomTooltipBalance = ({ active, payload }: ChartTooltipProps) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload as ChartData
       return (
@@ -151,8 +160,8 @@ export const UTXODistributionCharts = () => {
 
   const RADIAN = Math.PI / 180;
 
-  const renderCustomLabel = (props: any) => {
-    const { cx, cy, midAngle, outerRadius, name, percent } = props
+  const renderCustomLabel = (props: PieLabelRenderProps) => {
+    const { cx, cy, midAngle = 0, outerRadius, name, percent = 0 } = props
     
     // Only show labels for segments larger than 3% to avoid cluttering
     if (percent < 0.03) {
@@ -180,8 +189,8 @@ export const UTXODistributionCharts = () => {
     );
   }
   
-  const renderLabelLine = (props: any) => {
-    const { cx, cy, midAngle, outerRadius, percent } = props
+  const renderLabelLine = (props: PieLabelRenderProps) => {
+    const { cx, cy, midAngle = 0, outerRadius, percent = 0 } = props
     
     if (percent < 0.03) {
       return <g />
@@ -237,7 +246,7 @@ export const UTXODistributionCharts = () => {
     }
   }
 
-  const renderLegendFor = (data: ChartData[]) => (props: any) => {
+  const renderLegendFor = (data: ChartData[]) => (props: ChartLegendProps) => {
     const { payload } = props
 
     if (!payload || !payload.length) {
@@ -246,7 +255,7 @@ export const UTXODistributionCharts = () => {
 
     return (
       <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-xs sm:text-sm">
-        {payload.map((entry: any) => {
+        {payload.map((entry) => {
           const item = entry.payload as ChartData
           const swatchStyle = getLegendSwatchStyle(item, data)
 

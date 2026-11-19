@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
       const isHealthy = Math.random() > 0.1
       setRpcHealth(isHealthy ? 'healthy' : 'unhealthy')
       setLastChecked(new Date())
-    } catch (error) {
+    } catch {
       setRpcHealth('unhealthy')
       setLastChecked(new Date())
     }
