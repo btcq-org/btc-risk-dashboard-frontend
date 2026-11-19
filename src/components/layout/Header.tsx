@@ -83,7 +83,7 @@ export const Header = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8 font-['Inter']">
+          <nav className="hidden md:flex space-x-8">
             <Link 
               to="/" 
               className={`text-sm font-medium transition-colors ${
